@@ -1,15 +1,21 @@
 import { Component } from '@angular/core';
 import {NgOptimizedImage} from "@angular/common";
-import {MatToolbar} from "@angular/material/toolbar";
-import {MatRipple} from "@angular/material/core";
+import {PrimeTemplate} from "primeng/api";
+import {ButtonDirective} from "primeng/button";
+import {RouterLink} from "@angular/router";
+import {MenubarModule} from "primeng/menubar";
+import {Ripple} from "primeng/ripple";
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
   imports: [
     NgOptimizedImage,
-    MatToolbar,
-    MatRipple
+    PrimeTemplate,
+    ButtonDirective,
+    RouterLink,
+    MenubarModule,
+    Ripple
   ],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'
@@ -19,5 +25,11 @@ export class NavbarComponent {
   currentLanguage: string = 'VN';
   toggleLanguage() {
     this.currentLanguage = this.currentLanguage === 'VN' ? 'US' : 'VN';
+  }
+
+
+  // Dynamically gets the flag image URL
+  getFlagUrl(): string {
+    return `https://flagsapi.com/${this.currentLanguage}/flat/64.png`;
   }
 }
