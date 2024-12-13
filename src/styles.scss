@@ -2,5 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
-@import "primeng/resources/primeng.css";
-@import "primeicons/primeicons.css";
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+
+.debug-red {
+  @apply border-2 border-red-500;
+}
+
+.debug-green {
+  @apply border-2 border-green-500;
+}
+
+.debug-blue {
+  @apply border-2 border-blue-500;
+}
+
+.debug-yellow {
+  @apply border-2 border-yellow-500;
+}
+
+.debug-purple {
+  @apply border-2 border-purple-500;
+}

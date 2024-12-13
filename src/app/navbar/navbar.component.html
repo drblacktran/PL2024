@@ -1,11 +1,36 @@
 <main>
   <!-- Logo Section -->
-  <section class = "flex flex-row">
-    <div>
-      <img ngSrc = "assets/icons/named-logo.svg" alt="Phieu Linh Logo" width="301" height="102">
-    </div>
-    <div>
+  <section class="flex flex-row flex-grow items-center debug-purple  border-b-2 border-gray-200">
+    <img ngSrc="assets/icons/named-logo.svg" height="80" width="250">
+    <div class="debug-red flex flex-row flex-grow space-x-3">
+      <button class="debug-green ">
+        Về Phiêu Linh
+      </button>
+      <button>
+        Chương Trình Hoạt Động
+      </button>
+      <button>
+        Tài Trợ
+      </button>
+      <button>
+        Tin Tức
+      </button>
 
+      <div class= "debug-yellow flex flex-row flex-grow">
+        <button>
+          Chung Tay
+        </button>
+        <img
+          src="languageString()"
+          alt="Language Flag"
+          height="32"
+          width="32"
+          (click)="toggleLanguage()"
+          class="cursor-pointer"
+        />
+      </div>
     </div>
+
+
   </section>
 </main>
