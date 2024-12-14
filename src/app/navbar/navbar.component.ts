@@ -5,6 +5,7 @@ import {ButtonDirective} from "primeng/button";
 import {RouterLink} from "@angular/router";
 import {MenubarModule} from "primeng/menubar";
 import {Ripple} from "primeng/ripple";
+import {Tooltip, TooltipModule} from "primeng/tooltip";
 
 @Component({
   selector: 'app-navbar',
@@ -15,7 +16,8 @@ import {Ripple} from "primeng/ripple";
     ButtonDirective,
     RouterLink,
     MenubarModule,
-    Ripple
+    Ripple,
+    TooltipModule,
   ],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'

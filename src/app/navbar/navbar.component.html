@@ -2,7 +2,7 @@
   <section>
     <div class="flex flex-row items-center justify-between shadow-md">
       <img ngSrc="assets/icons/named-logo.svg" height="102" width="250" alt="The Phieu Linh Project Logo">
-      <div class= " flex flex-row justify-end font-medium gap-10 debug-red">
+      <div class= " flex flex-row justify-end font-medium gap-10">
         <div
           class = "flex flex-row space-x-8 items-end "
           style = "font-size: 16px; letter-spacing: -0.015rem">
@@ -26,7 +26,9 @@
         <div class= "flex flex-row gap-6">
           <button
             class = " uppercase px-8 py-2 bg-[#444B5B] text-white rounded-lg"
-            style = "font-size: 16px; letter-spacing: -0.015rem">
+            style = "font-size: 16px; letter-spacing: -0.015rem"
+            pRipple
+          >
             Chung Tay
           </button>
           <img
@@ -35,8 +37,19 @@
             height="24"
             width="36"
             (click)="toggleLanguage()"
-            class="mr-5"
+            class="mr-5 pt-[5px]"
+            [pTooltip]="customTooltip"
+            tooltipPosition="bottom"
+            tooltipStyleClass="custom-tooltip"
+            showDelay="100"
+            hideDelay="100"
           />
+
+          <ng-template #customTooltip>
+            <div class="flex flex-col items-center bg-[#444B5B]">
+              <span class="text-white">Change Language</span>
+            </div>
+          </ng-template>
         </div>
       </div>
     </div>
