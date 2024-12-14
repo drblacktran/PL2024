@@ -1,1 +1,62 @@
-<p>programs works!</p>
+<section>
+  <div class="flex flex-col items-center justify-center bg-white ">
+    <div class="debug-blue flex flex-col gap-8 px-4 py-10 w-[90%] xl:py-28 2xl:py-36">
+      <div class="flex flex-col items-center">
+        <div
+          class="flex w-fit items-center justify-center whitespace-nowrap rounded-full px-4 py-2 text-center border border-solid border-[#99999] bg-white text-grey-mid">
+        <span
+          class=" m-0 flex flex-row items-center font-semibold uppercase not-italic leading-[100%] tracking-[0.08em]"
+          style="font-size: 17px; color: #555555">
+          Chương Trình Hoạt Động
+        </span>
+        </div>
+      </div>
+
+      <div class="flex flex-row gap-10 px-4">
+
+        <!-- Left Column: Years -->
+        <div class=" flex flex-col gap-[108px] pt-8 items-center relative">
+          <!-- Loop through years -->
+          <div
+            *ngFor="let year of years; let i = index"
+            class>
+            <div
+              [ngStyle]="{ color: getColor(i) }"
+              class="font-bold stroke-amber-200"
+              style="font-size: 24px"
+              >
+              {{ year }}
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Details -->
+        <div class="flex flex-col ml-12 gap-8 flex-grow">
+          <div
+            *ngFor="let item of timelineData; let i = index"
+            class="bg-white shadow-md rounded-lg p-6 border-l-4 fade-in-left"
+            [ngStyle]="{ borderColor: getColor(i) }"
+
+          >
+            <!-- Title -->
+            <h2
+              class="text-lg text-center font-bold mb-2"
+              [ngStyle]="{ color: getColor(i) }"
+            >
+              <span>{{ item.title }}</span>
+            </h2>
+
+            <!-- Description -->
+            <p class="text-gray-600 text-center italic">
+              <span>{{ item.schoolName }}</span>
+              <span>, {{ item.location }}</span>
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+  </div>
+</section>
