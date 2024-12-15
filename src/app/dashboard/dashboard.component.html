@@ -1,1 +1,72 @@
-<p>dashboard works!</p>
+<section>
+  <div class="mt-2 flex flex-col items-center justify-center bg-white ">
+    <div class="flex flex-col debug-red gap-8 px-4 py-10 w-[90%] xl:py-28 2xl:py-36">
+      <div class="flex flex-col items-center">
+        <div
+          class="flex w-fit items-center justify-center whitespace-nowrap rounded-full px-4 py-2 text-center border border-solid border-[#99999] bg-white text-grey-mid">
+        <span
+          class=" m-0 flex flex-row items-center font-semibold uppercase not-italic leading-[100%] tracking-[0.08em]"
+          style="font-size: 17px; color: #555555">
+          Về Phiêu Linh
+        </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="flex flex-col items-center justify-center bg-white ">
+    <div class="flex flex-col debug-purple gap-8 px-4 py-10 w-[90%] xl:py-28 2xl:py-36">
+      <div class="flex flex-col items-center debug-yellow">
+        <div
+          class="flex w-fit items-center justify-center whitespace-nowrap rounded-full px-4 py-2 text-center border border-solid border-[#99999] bg-white text-grey-mid">
+        <span
+          class=" m-0 flex flex-row items-center font-semibold uppercase not-italic leading-[100%] tracking-[0.08em]"
+          style="font-size: 17px; color: #555555">
+          Dấu Ấn
+        </span>
+        </div>
+      </div>
+
+      <div class="flex flex-col flex-grow gap-14 px-2">
+        <!-- First Row -->
+        <div class="flex flex-row justify-between">
+          <div
+            *ngFor="let item of rowOneData"
+            class="flex flex-col items-center bg-white shadow-md rounded-lg p-6 w-[300px] border-r-4"
+            [ngStyle]="{ borderColor: item.color }"
+          >
+            <h2
+              class="text-3xl font-bold mb-2"
+              [ngStyle]="{ color: item.color }"
+            >
+              {{ item.number }}
+            </h2>
+            <p class="text-center text-gray-600">{{ item.description }}</p>
+          </div>
+        </div>
+
+        <!-- Second Row -->
+        <div class="flex flex-row justify-between">
+          <div
+            *ngFor="let item of rowTwoData"
+            class="flex flex-col items-center bg-white shadow-md rounded-lg p-6 w-[300px] border-r-4"
+            [ngStyle]="{ borderColor: item.color }"
+          >
+            <h2
+              class="text-3xl font-bold mb-2"
+              [ngStyle]="{ color: item.color }"
+            >
+              {{ item.number }}
+            </h2>
+            <p class="text-center text-gray-600">{{ item.description }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<app-programs></app-programs>
+<app-sponsor></app-sponsor>

@@ -6,11 +6,11 @@ import { NotFoundComponent } from './not-found/not-found.component';
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: '/dashboard',
+    redirectTo: '/home',
     pathMatch: 'full', // Redirect to dashboard for root
   },
   {
-    path: 'dashboard',
+    path: 'home',
     component: DashboardComponent, // Dashboard route
   },
   {
