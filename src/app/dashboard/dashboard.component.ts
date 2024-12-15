@@ -4,6 +4,7 @@ import {ProgramsComponent} from "../programs/programs.component";
 import {SponsorComponent} from "../sponsor/sponsor.component";
 import {DividerModule} from "primeng/divider";
 import {CarouselModule} from "primeng/carousel";
+import {Button} from "primeng/button";
 
 @Component({
   selector: 'app-dashboard',
@@ -15,7 +16,8 @@ import {CarouselModule} from "primeng/carousel";
     SponsorComponent,
     NgIf,
     DividerModule,
-    CarouselModule
+    CarouselModule,
+    Button
   ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
@@ -82,7 +84,6 @@ export class DashboardComponent {
     },
   ];
 
-  selectedGroup: number = 0;
 
   groups = [
     { name: 'BoAs' },
@@ -93,27 +94,63 @@ export class DashboardComponent {
     { name: 'Tài Chính' },
   ];
 
-  cards = Array.from({ length: 35 }, (_, i) => ({
-    image: `assets/card-${i + 1}.jpg`, // Replace with real paths
-    group: i % 6, // Divide into 6 groups
-    selected: false,
-  }));
+  cards = this.generateRandomizedCards(35);
 
-  filteredCards = this.cards;
+  selectedGroup: number = -1; // -1 means all members
+  filteredCards: any[] = [];
+  currentPage: number = 0;
+  cardsPerPage: number = 18; // 6x3 grid
+  visibleCards: any[] = [];
 
-  // Filter cards based on group selection
-  selectGroup(groupIndex: number) {
-    this.selectedGroup = groupIndex;
-    this.filteredCards = this.cards.map((card) => ({
-      ...card,
-      selected: card.group === groupIndex,
+
+
+
+  // Generate cards with numbers and random group assignments
+  generateRandomizedCards(totalCards: number) {
+    return Array.from({ length: totalCards }, (_, i) => ({
+      number: i + 1, // Card number
+      group: Math.floor(Math.random() * 6), // Random group (0-5)
     }));
   }
 
-  // Responsive options for PrimeNG Carousel
-  responsiveOptions = [
-    { breakpoint: '1024px', numVisible: 3, numScroll: 1 },
-    { breakpoint: '768px', numVisible: 2, numScroll: 1 },
-    { breakpoint: '560px', numVisible: 1, numScroll: 1 },
-  ];
+  // Select a group and reset pagination
+  selectGroup(groupIndex: number) {
+    this.selectedGroup = groupIndex;
+    if (groupIndex === -1) {
+      this.filteredCards = [...this.cards]; // Show all members
+    } else {
+      this.filteredCards = this.cards.filter((card) => card.group === groupIndex);
+    }
+    this.currentPage = 0; // Reset to first page
+    this.updateVisibleCards();
+  }
+
+  // Update visible cards based on the current page
+  updateVisibleCards() {
+    const start = this.currentPage * this.cardsPerPage;
+    const end = start + this.cardsPerPage;
+    this.visibleCards = this.filteredCards.slice(start, end);
+
+    // Handle circular scrolling
+    if (this.visibleCards.length < this.cardsPerPage) {
+      const remaining = this.cardsPerPage - this.visibleCards.length;
+      this.visibleCards = this.visibleCards.concat(
+        this.filteredCards.slice(0, remaining)
+      );
+    }
+  }
+
+  // Go to the next page
+  nextPage() {
+    this.currentPage = (this.currentPage + 1) % Math.ceil(this.filteredCards.length / this.cardsPerPage);
+    this.updateVisibleCards();
+  }
+
+  // Go to the previous page
+  prevPage() {
+    this.currentPage =
+      (this.currentPage - 1 + Math.ceil(this.filteredCards.length / this.cardsPerPage)) %
+      Math.ceil(this.filteredCards.length / this.cardsPerPage);
+    this.updateVisibleCards();
+  }
 }
