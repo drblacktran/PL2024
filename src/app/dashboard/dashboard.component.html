@@ -1,6 +1,6 @@
 <section>
   <div class="mt-2 flex flex-col items-center justify-center bg-white ">
-    <div class="flex flex-col debug-red gap-8 px-4 py-10 w-[90%] xl:py-28 2xl:py-36">
+    <div class="flex flex-col debug-red gap-8 px-6 py-10 w-[90%] xl:py-28 2xl:py-36">
       <div class="flex flex-col items-center">
         <div
           class="flex w-fit items-center justify-center whitespace-nowrap rounded-full px-4 py-2 text-center border border-solid border-[#99999] bg-white text-grey-mid">
@@ -11,8 +11,38 @@
         </span>
         </div>
       </div>
+
+      <div class="">
+        <!-- Loop through sections -->
+        <div
+          *ngFor="let section of sections; let i = index"
+          class="flex flex-row overflow-hidden rounded-b-lg bg-white border-b-4"
+          [ngClass]="{
+            'border-[#CF5258]': i % 4 === 0,
+            'border-[#E19E29]': i % 4 === 1,
+            'border-[#78A4A3] ': i % 4 === 2,
+            'border-[#444B5B]': i % 4 === 3,
+            'flex-row-reverse': i % 2 !== 0
+          }">
+
+          <!-- Title Section -->
+          <div class="w-1/2 p-6 flex items-center justify-center">
+            <h2 class="text-3xl font-semibold text-black text-center">{{ section.title }}</h2>
+          </div>
+
+
+
+          <!-- Description Section -->
+          <div class="w-1/2 p-6 flex items-center text-justify">
+            <p class="text-lg text-[#444B5B] ">{{ section.description }}</p>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
+
+
 
   <div class="flex flex-col items-center bg-white w-full gap-6 p-6">
     <!-- Roof -->
@@ -78,191 +108,15 @@
     <div class="flex flex-col debug-purple gap-8 px-4 py-10 w-[90%] xl:py-28 2xl:py-36">
 
 
-      <div *ngFor="let item of cultureLines; let i = index" class="flex flex-col items-center w-full">
-        <!-- Section -->
-        <div class="flex items-center w-full max-w-5xl gap-8 py-6" [class.flex-row-reverse]="i % 2 === 0">
-          <!-- Text -->
-          <div class="w-full md:w-1/2 text-center md:text-left">
-            <p class="text-lg font-medium text-gray-700">{{ item.text }}</p>
-          </div>
-          <!-- Image -->
-          <div class="w-full md:w-1/2 flex justify-center">
-            <img [src]="item.image" alt="Culture Image" class="w-full max-w-sm rounded-lg shadow-md" />
-          </div>
-        </div>
 
-        <!-- Divider -->
-        <p-divider *ngIf="i < cultureLines.length - 1" type="solid">
-        </p-divider>
-      </div>
+      <app-culture></app-culture>
+      <app-milestones></app-milestones>
+      <app-members></app-members>
 
-      <div
-        *ngFor="let item of cultureLines; let i = index"
-        [class.bg-gray-100]="i % 2 === 0"
-        [class.bg-gray-50]="i % 2 !== 0"
-        class="relative flex items-center justify-center py-10 px-4"
-      >
-        <!-- Border at 4 corners -->
-        <div class="absolute inset-0 pointer-events-none">
-          <!-- Top-left Corner -->
-          <div class="absolute top-0 left-0 w-6 h-6 border-t-4 border-l-4 border-[#CF5258] rounded-tl-lg"></div>
-          <!-- Top-right Corner -->
-          <div class="absolute top-0 right-0 w-6 h-6 border-t-4 border-r-4 border-[#E19E29] rounded-tr-lg"></div>
-          <!-- Bottom-left Corner -->
-          <div class="absolute bottom-0 left-0 w-6 h-6 border-b-4 border-l-4 border-[#78A4A3] rounded-bl-lg"></div>
-          <!-- Bottom-right Corner -->
-          <div class="absolute bottom-0 right-0 w-6 h-6 border-b-4 border-r-4 border-[#444B5B] rounded-br-lg"></div>
-        </div>
-
-        <!-- Content -->
-        <div class="flex items-center space-x-4">
-          <img [src]="item.image" alt="Culture Image" class="w-16 h-16" />
-          <p class="text-lg font-medium text-gray-700">{{ item.text }}</p>
-        </div>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div *ngFor="let item of cultureLines"
-             class="flex flex-col items-center p-6 bg-white rounded-lg shadow-md border-b-4"
-            [ngStyle]="{'border-color': item.color}"
-        >
-          <img [src]="item.image" alt="Culture Image" class="w-16 h-16 mb-4" />
-          <p class="text-center font-medium text-gray-700">{{ item.text }}</p>
-        </div>
-      </div>
-
-      <div
-        *ngFor="let item of cultureLines; let i = index"
-        [class.bg-gray-100]="i % 2 === 0"
-        [class.bg-gray-50]="i % 2 !== 0"
-        class="relative flex items-center justify-center py-10 px-4 rounded-lg"
-      >
-        <!-- Borders at 4 corners -->
-        <div class="absolute inset-0 pointer-events-none">
-          <!-- Top-left Corner -->
-          <div class="absolute top-0 left-0 w-6 h-6 border-t-4 border-l-4 rounded-tl-lg" [ngStyle]="{'border-color': item.color}"></div>
-          <!-- Top-right Corner -->
-          <div class="absolute top-0 right-0 w-6 h-6 border-t-4 border-r-4 rounded-tr-lg" [ngStyle]="{'border-color': item.color}"></div>
-          <!-- Bottom-left Corner -->
-          <div class="absolute bottom-0 left-0 w-6 h-6 border-b-4 border-l-4 rounded-bl-lg" [ngStyle]="{'border-color': item.color}"></div>
-          <!-- Bottom-right Corner -->
-          <div class="absolute bottom-0 right-0 w-6 h-6 border-b-4 border-r-4 rounded-br-lg" [ngStyle]="{'border-color': item.color}"></div>
-        </div>
-
-        <!-- Content -->
-        <div class="flex items-center space-x-4">
-          <img [src]="item.image" alt="Culture Image" class="w-16 h-16" />
-          <p class="text-lg font-medium text-gray-700">{{ item.text }}</p>
-        </div>
-      </div>
-
-      <div class="flex flex-col items-center debug-yellow">
-        <div
-          class="flex w-fit items-center justify-center whitespace-nowrap rounded-full px-4 py-2 text-center border border-solid border-[#99999] bg-white text-grey-mid">
-        <span
-          class=" m-0 flex flex-row items-center font-semibold uppercase not-italic leading-[100%] tracking-[0.08em]"
-          style="font-size: 17px; color: #555555">
-          Dấu Ấn
-        </span>
-        </div>
-      </div>
-
-      <div class="flex flex-col flex-grow gap-14 px-2">
-        <!-- First Row -->
-        <div class="flex flex-row justify-between">
-          <div
-            *ngFor="let item of rowOneData"
-            class="flex flex-col items-center bg-white shadow-md rounded-lg p-6 w-[300px] border-r-4"
-            [ngStyle]="{ borderColor: item.color }"
-          >
-            <h2
-              class="text-3xl font-bold mb-2"
-              [ngStyle]="{ color: item.color }"
-            >
-              {{ item.number }}
-            </h2>
-            <p class="text-center text-gray-600">{{ item.description }}</p>
-          </div>
-        </div>
-
-        <!-- Second Row -->
-        <div class="flex flex-row justify-between">
-          <div
-            *ngFor="let item of rowTwoData"
-            class="flex flex-col items-center bg-white shadow-md rounded-lg p-6 w-[300px] border-r-4"
-            [ngStyle]="{ borderColor: item.color }"
-          >
-            <h2
-              class="text-3xl font-bold mb-2"
-              [ngStyle]="{ color: item.color }"
-            >
-              {{ item.number }}
-            </h2>
-            <p class="text-center text-gray-600">{{ item.description }}</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="p-4">
-        <!-- Group Navigation -->
-        <div class="flex justify-center space-x-4 mb-6">
-          <button
-            *ngFor="let group of groups; let i = index"
-            (click)="selectGroup(i)"
-            [class.text-orange-500]="selectedGroup === i"
-            class="uppercase font-medium px-4 py-2 rounded transition-all duration-300 hover:text-orange-400"
-          >
-            {{ group.name }}
-          </button>
-          <button
-            (click)="selectGroup(-1)"
-            [class.text-orange-500]="selectedGroup === -1"
-            class="uppercase font-medium px-4 py-2 rounded transition-all duration-300 hover:text-orange-400"
-          >
-            All Members
-          </button>
-        </div>
-
-        <!-- Fixed 6x3 Grid -->
-        <div class="relative w-full">
-          <div class="grid grid-cols-6 gap-4">
-            <!-- Display Visible Cards -->
-            <div
-              *ngFor="let card of visibleCards; let i = index"
-              class="relative h-32 group rounded-lg overflow-hidden shadow-md hover:scale-105 transition-transform duration-300 bg-gray-100 flex items-center justify-center"
-            >
-              <!-- Card Number -->
-              <div class="text-xl font-bold text-gray-700">
-                Card {{ card.number }}
-              </div>
-
-              <!-- Quote Icon -->
-            </div>
-          </div>
-
-          <!-- Navigation Buttons -->
-          <div class="flex justify-between mt-4">
-            <p-button
-              label="Prev"
-              (onClick)="prevPage()"
-              [disabled]="filteredCards.length <= cardsPerPage"
-              icon="pi pi-chevron-left"
-              class="px-4 py-2"
-            ></p-button>
-
-            <p-button
-              label="Next"
-              (onClick)="nextPage()"
-              [disabled]="filteredCards.length <= cardsPerPage"
-              icon="pi pi-chevron-right"
-              class="px-4 py-2"
-            ></p-button>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 </section>
 
 <app-programs></app-programs>
 <app-sponsor></app-sponsor>
+<app-contacts></app-contacts>

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {NgOptimizedImage} from "@angular/common";
+import {NgForOf, NgOptimizedImage} from "@angular/common";
 import {PrimeTemplate} from "primeng/api";
 import {ButtonDirective} from "primeng/button";
 import {RouterLink} from "@angular/router";
@@ -18,11 +18,21 @@ import {Tooltip, TooltipModule} from "primeng/tooltip";
     MenubarModule,
     Ripple,
     TooltipModule,
+    NgForOf,
   ],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'
 })
 export class NavbarComponent {
+
+
+  navButtons = [
+    { label: 'Về Phiêu Linh' },
+    { label: 'Chương Trình Hoạt Động' },
+    { label: 'Tài Trợ' },
+    { label: 'Tin Tức' },
+    { label: 'Liên Hệ' },
+  ];
 
   currentLanguage: string = 'VN';
   toggleLanguage() {

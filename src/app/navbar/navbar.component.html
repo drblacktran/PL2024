@@ -2,32 +2,20 @@
   <section>
     <div class="flex flex-row items-center justify-between shadow-md z-20">
       <img ngSrc="assets/icons/named-logo.svg" height="102" width="250" alt="The Phieu Linh Project Logo">
-      <div class= " flex flex-row justify-end font-medium gap-10">
+      <div class= " flex flex-row justify-end font-medium gap-8">
         <div
-          class = "flex flex-row space-x-8 items-end "
-          style = "font-size: 16px; letter-spacing: -0.015rem">
-          <button class="uppercase">
-            Về Phiêu Linh
-          </button>
-          <button class= "uppercase">
-            Chương Trình Hoạt Động
-          </button>
-          <button class= "uppercase">
-            Tài Trợ
-          </button>
-          <button class= "uppercase">
-            Tin Tức
-          </button>
-          <button class= "uppercase">
-            Liên Hệ
-          </button>
+          class="flex flex-row space-x-6 items-end debug-green "
+          style="font-size: 16px; letter-spacing: -0.015rem"
+          *ngFor="let button of navButtons; let i = index">
+            <button class = "uppercase px-1">
+              {{ button.label }}
+            </button>
         </div>
 
         <div class= "flex flex-row gap-6">
           <button
             class = " uppercase px-8 py-2 bg-[#444B5B] text-white rounded-lg"
             style = "font-size: 16px; letter-spacing: -0.015rem"
-            pRipple
           >
             Chung Tay
           </button>

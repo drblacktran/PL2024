@@ -1,0 +1,57 @@
+<div>
+  <!-- Group Navigation -->
+  <div class="flex justify-center space-x-4 mb-6">
+    <button
+      *ngFor="let group of groups; let i = index"
+      (click)="selectGroup(i)"
+      [class.text-orange-500]="selectedGroup === i"
+      class="uppercase font-medium px-4 py-2 rounded transition-all duration-300 hover:text-orange-400"
+    >
+      {{ group.name }}
+    </button>
+    <button
+      (click)="selectGroup(-1)"
+      [class.text-orange-500]="selectedGroup === -1"
+      class="uppercase font-medium px-4 py-2 rounded transition-all duration-300 hover:text-orange-400"
+    >
+      All Members
+    </button>
+  </div>
+
+  <!-- Fixed 6x3 Grid -->
+  <div class="relative w-full">
+    <div class="grid grid-cols-6 gap-4">
+      <!-- Display Visible Cards -->
+      <div
+        *ngFor="let card of visibleCards; let i = index"
+        class="relative h-32 group rounded-lg overflow-hidden shadow-md hover:scale-105 transition-transform duration-300 bg-gray-100 flex items-center justify-center"
+      >
+        <!-- Card Number -->
+        <div class="text-xl font-bold text-gray-700">
+          Card {{ card.number }}
+        </div>
+
+        <!-- Quote Icon -->
+      </div>
+    </div>
+
+    <!-- Navigation Buttons -->
+    <div class="flex justify-between mt-4">
+      <p-button
+        label="Prev"
+        (onClick)="prevPage()"
+        [disabled]="filteredCards.length <= cardsPerPage"
+        icon="pi pi-chevron-left"
+        class="px-4 py-2"
+      ></p-button>
+
+      <p-button
+        label="Next"
+        (onClick)="nextPage()"
+        [disabled]="filteredCards.length <= cardsPerPage"
+        icon="pi pi-chevron-right"
+        class="px-4 py-2"
+      ></p-button>
+    </div>
+  </div>
+</div>
