@@ -1,16 +1,14 @@
 <section>
-  <div class="flex flex-col items-center debug-yellow">
-    <div
-      class="flex w-fit items-center justify-center whitespace-nowrap rounded-full px-4 py-2 text-center border border-solid border-[#99999] bg-white text-grey-mid">
-        <span
-          class=" m-0 flex flex-row items-center font-semibold uppercase not-italic leading-[100%] tracking-[0.08em]"
-          style="font-size: 17px; color: #555555">
-          Dấu Ấn
-        </span>
-    </div>
-  </div>
+  <app-title
+    [itemsAlignment]="'items-end'"
+    [borderColor]="'#999999'"
+    [backgroundColor]="'#FFFFFF'"
+    [textColor]="'#555555'"
+    [fontSize]="'18px'"
+    [label]="' Dấu Ấn'">
+  </app-title>
 
-  <div class="flex flex-col flex-grow gap-14 px-2">
+  <div class="flex flex-col flex-grow gap-14 mt-8 px-2">
     <!-- First Row -->
     <div class="flex flex-row justify-between">
       <div

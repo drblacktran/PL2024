@@ -1,6 +1,15 @@
 <div>
+  <app-title
+    [itemsAlignment]="'items-start'"
+    [borderColor]="'#999999'"
+    [backgroundColor]="'#FFFFFF'"
+    [textColor]="'#555555'"
+    [fontSize]="'18px'"
+    [label]="'Thành Viên'">
+  </app-title>
+
   <!-- Group Navigation -->
-  <div class="flex justify-center space-x-4 mb-6">
+  <div class="flex justify-center space-x-4 my-6">
     <button
       *ngFor="let group of groups; let i = index"
       (click)="selectGroup(i)"

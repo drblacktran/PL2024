@@ -1,16 +1,14 @@
 <section>
   <div class="flex flex-col items-center justify-center bg-white ">
-    <div class="debug-blue flex flex-col gap-8 px-4 py-10 w-[90%] xl:py-28 2xl:py-36">
-      <div class="flex flex-col items-center">
-        <div
-          class="flex w-fit items-center justify-center whitespace-nowrap rounded-full px-4 py-2 text-center border border-solid border-[#99999] bg-white text-grey-mid">
-        <span
-          class=" m-0 flex flex-row items-center font-semibold uppercase not-italic leading-[100%] tracking-[0.08em]"
-          style="font-size: 17px; color: #555555">
-          Chương Trình Hoạt Động
-        </span>
-        </div>
-      </div>
+    <div class=" flex flex-col gap-8 px-4 py-10 w-[90%] xl:py-28 2xl:py-36">
+      <app-title
+        [itemsAlignment]="'items-center'"
+        [borderColor]="'#999999'"
+        [backgroundColor]="'#FFFFFF'"
+        [textColor]="'#555555'"
+        [fontSize]="'18px'"
+        [label]="' Chương Trình Hoạt Động'">
+      </app-title>
 
       <div class="flex flex-row gap-10 px-4">
 

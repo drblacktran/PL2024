@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {NgForOf, NgOptimizedImage, NgStyle} from "@angular/common";
 import {Ripple} from "primeng/ripple";
+import {TitleComponent} from "../shared/title/title.component";
 
 @Component({
   selector: 'app-programs',
@@ -9,6 +10,7 @@ import {Ripple} from "primeng/ripple";
     NgStyle,
     NgForOf,
     NgOptimizedImage,
+    TitleComponent,
   ],
   templateUrl: './programs.component.html',
   styleUrl: './programs.component.scss'

@@ -1,0 +1,36 @@
+<main>
+  <app-title
+    [itemsAlignment]="'items-center'"
+    [borderColor]="'#999999'"
+    [backgroundColor]="'#FFFFFF'"
+    [textColor]="'#555555'"
+    [fontSize]="'18px'"
+    [label]="' Về Phiêu Linh'">
+  </app-title>
+
+  <div class="wrapper">
+    <!-- Loop through sections -->
+    <div
+      *ngFor="let section of sections; let i = index"
+      class="flex flex-row overflow-hidden rounded-b-lg bg-white border-b-4"
+      [ngClass]="{
+            'border-p-red': i % 4 === 0,
+            'border-p-orange': i % 4 === 1,
+            'border-p-teal ': i % 4 === 2,
+            'border-p-blue': i % 4 === 3,
+            'flex-row-reverse': i % 2 !== 0
+          }">
+
+      <!-- Title Section -->
+      <div class="w-1/2 p-6 flex items-center justify-center">
+        <h2 class="text-3xl font-semibold text-black text-center">{{ section.title }}</h2>
+      </div>
+
+      <!-- Description Section -->
+      <div class="w-1/2 p-6 flex items-center text-justify">
+        <p class="text-lg text-[#444B5B] ">{{ section.description }}</p>
+      </div>
+    </div>
+  </div>
+</main>
+

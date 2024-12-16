@@ -1,12 +1,14 @@
 import { Component } from '@angular/core';
 import {NgForOf, NgStyle} from "@angular/common";
+import {TitleComponent} from "../shared/title/title.component";
 
 @Component({
   selector: 'app-culture',
   standalone: true,
   imports: [
     NgForOf,
-    NgStyle
+    NgStyle,
+    TitleComponent
   ],
   templateUrl: './culture.component.html',
   styleUrl: './culture.component.scss'

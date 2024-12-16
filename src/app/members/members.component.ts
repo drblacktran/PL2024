@@ -1,14 +1,16 @@
 import { Component } from '@angular/core';
 import {Button} from "primeng/button";
 import {NgForOf} from "@angular/common";
+import {TitleComponent} from "../shared/title/title.component";
 
 @Component({
   selector: 'app-members',
   standalone: true,
-    imports: [
-        Button,
-        NgForOf
-    ],
+  imports: [
+    Button,
+    NgForOf,
+    TitleComponent
+  ],
   templateUrl: './members.component.html',
   styleUrl: './members.component.scss'
 })
