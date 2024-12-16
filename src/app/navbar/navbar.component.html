@@ -1,13 +1,13 @@
 <main>
   <section>
-    <div class="flex flex-row items-center justify-between shadow-md z-20">
+    <div class="flex flex-row items-center justify-between bg-gray-50 shadow-md z-20">
       <img ngSrc="assets/icons/named-logo.svg" height="102" width="250" alt="The Phieu Linh Project Logo">
       <div class= " flex flex-row justify-end font-medium gap-8">
         <div
-          class="flex flex-row space-x-6 items-end debug-green "
+          class="flex flex-row space-x-6 items-end "
           style="font-size: 16px; letter-spacing: -0.015rem"
           *ngFor="let button of navButtons; let i = index">
-            <button class = "uppercase px-1">
+            <button class = "uppercase px-1" (click)="scrollTo(button.link)">
               {{ button.label }}
             </button>
         </div>

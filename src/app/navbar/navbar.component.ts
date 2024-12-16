@@ -27,12 +27,27 @@ export class NavbarComponent {
 
 
   navButtons = [
-    { label: 'Về Phiêu Linh' },
-    { label: 'Chương Trình Hoạt Động' },
-    { label: 'Tài Trợ' },
-    { label: 'Tin Tức' },
-    { label: 'Liên Hệ' },
+    { label: 'Về Phiêu Linh', link: 'about' },
+    { label: 'Chương Trình Hoạt Động', link: 'programs' },
+    { label: 'Tài Trợ', link: 'sponsor' },
+    { label: 'Tin Tức', link: 'events' },
+    { label: 'Liên Hệ', link: 'contacts' },
   ];
+
+  scrollTo(section: string): void {
+    const element = document.getElementById(section);
+    const navbarHeight = 60; // Navbar height here (adjust as needed)
+
+    if (element) {
+      const yOffset = -navbarHeight; // Negative offset to account for navbar
+      const y = element.getBoundingClientRect().top + window.scrollY + yOffset;
+
+      window.scrollTo({
+        top: y,
+        behavior: 'smooth',
+      });
+    }
+  }
 
   currentLanguage: string = 'VN';
   toggleLanguage() {

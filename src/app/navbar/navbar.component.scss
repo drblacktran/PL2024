@@ -1,2 +1,8 @@
-
+:host {
+  position: sticky; /* Makes the navbar stick to the viewport */
+  top:0; /* Ensures it sticks to the top */
+  z-index: 50;      /* Ensures it stays above other elements */
+  background-color: white; /* Ensures background remains visible */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional shadow for visibility */
+}
 
