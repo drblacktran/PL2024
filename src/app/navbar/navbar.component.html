@@ -2,15 +2,20 @@
   <section>
     <div class="flex flex-row items-center justify-between bg-gray-50 shadow-md z-20">
       <img ngSrc="assets/icons/named-logo.svg" height="102" width="250" alt="The Phieu Linh Project Logo">
-      <div class= " flex flex-row justify-end font-medium gap-8">
+      <div class= " flex flex-row justify-end font-medium gap-7">
         <div
-          class="flex flex-row space-x-6 items-end "
+          class="flex flex-row items-center "
           style="font-size: 16px; letter-spacing: -0.015rem"
           *ngFor="let button of navButtons; let i = index">
-            <button class = "uppercase px-1" (click)="scrollTo(button.link)">
+            <button
+              class = "uppercase pr-1  border-r-2 border-gray-300 hover:text-p-teal hover:border-b-2 hover:rounded-br-lg"
+              (click)="scrollTo(button.link)">
               {{ button.label }}
+
             </button>
         </div>
+
+
 
         <div class= "flex flex-row gap-6">
           <button

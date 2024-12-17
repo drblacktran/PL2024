@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {NgForOf, NgOptimizedImage} from "@angular/common";
+import {NgClass, NgForOf, NgOptimizedImage} from "@angular/common";
 import {PrimeTemplate} from "primeng/api";
 import {ButtonDirective} from "primeng/button";
 import {RouterLink} from "@angular/router";
@@ -19,6 +19,7 @@ import {Tooltip, TooltipModule} from "primeng/tooltip";
     Ripple,
     TooltipModule,
     NgForOf,
+    NgClass,
   ],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'
@@ -54,8 +55,11 @@ export class NavbarComponent {
     this.currentLanguage = this.currentLanguage === 'VN' ? 'US' : 'VN';
   }
 
+  isHovered = [false, false, false, false, false]; // Array to store hover state of each button
+
 
   // Dynamically gets the flag image URL
+
   getFlagUrl(): string {
     return `https://flagsapi.com/${this.currentLanguage}/flat/64.png`;
   }

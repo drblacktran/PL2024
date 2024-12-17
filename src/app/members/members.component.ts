@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {Button} from "primeng/button";
 import {NgForOf} from "@angular/common";
 import {TitleComponent} from "../shared/title/title.component";
+import * as membersData from "../../assets/data/members.json"
 
 @Component({
   selector: 'app-members',
@@ -15,68 +16,57 @@ import {TitleComponent} from "../shared/title/title.component";
   styleUrl: './members.component.scss'
 })
 export class MembersComponent {
-  groups = [
-    { name: 'BoAs' },
-    { name: 'Tài Nguyên' },
-    { name: 'Chương Trình' },
-    { name: 'Nhân Sự' },
-    { name: 'Truyền Thông' },
-    { name: 'Tài Chính' },
-  ];
-
-  cards = this.generateRandomizedCards(35);
-
-  selectedGroup: number = -1; // -1 means all members
+  members: any[] = [];
+  groups: string[] = [];
+  selectedGroup: string = 'Tất Cả';
   filteredCards: any[] = [];
   currentPage: number = 0;
-  cardsPerPage: number = 18; // 6x3 grid
+  cardsPerPage: number = 18;
   visibleCards: any[] = [];
 
-
-
-
-  // Generate cards with numbers and random group assignments
-  generateRandomizedCards(totalCards: number) {
-    return Array.from({ length: totalCards }, (_, i) => ({
-      number: i + 1, // Card number
-      group: Math.floor(Math.random() * 6), // Random group (0-5)
-    }));
+  ngOnInit(): void {
+    this.loadMembers();
   }
 
-  // Select a group and reset pagination
-  selectGroup(groupIndex: number) {
-    this.selectedGroup = groupIndex;
-    if (groupIndex === -1) {
-      this.filteredCards = [...this.cards]; // Show all members
+  loadMembers() {
+    this.members = (membersData as any).members;
+
+    // Dynamically create unique groups
+    this.groups = Array.from(new Set(this.members.map((m) => m.group)));
+    this.groups.unshift('Tất Cả'); // Add 'All' group to the beginning
+
+    this.selectGroup('Tất Cả');
+  }
+
+  selectGroup(groupName: string) {
+    this.selectedGroup = groupName;
+
+    if (groupName === 'Tất Cả') {
+      this.filteredCards = [...this.members];
     } else {
-      this.filteredCards = this.cards.filter((card) => card.group === groupIndex);
+      this.filteredCards = this.members.filter((member) => member.group === groupName);
     }
-    this.currentPage = 0; // Reset to first page
+
+    this.currentPage = 0;
     this.updateVisibleCards();
   }
 
-  // Update visible cards based on the current page
   updateVisibleCards() {
     const start = this.currentPage * this.cardsPerPage;
     const end = start + this.cardsPerPage;
     this.visibleCards = this.filteredCards.slice(start, end);
 
-    // Handle circular scrolling
     if (this.visibleCards.length < this.cardsPerPage) {
       const remaining = this.cardsPerPage - this.visibleCards.length;
-      this.visibleCards = this.visibleCards.concat(
-        this.filteredCards.slice(0, remaining)
-      );
+      this.visibleCards = this.visibleCards.concat(this.filteredCards.slice(0, remaining));
     }
   }
 
-  // Go to the next page
   nextPage() {
     this.currentPage = (this.currentPage + 1) % Math.ceil(this.filteredCards.length / this.cardsPerPage);
     this.updateVisibleCards();
   }
 
-  // Go to the previous page
   prevPage() {
     this.currentPage =
       (this.currentPage - 1 + Math.ceil(this.filteredCards.length / this.cardsPerPage)) %
