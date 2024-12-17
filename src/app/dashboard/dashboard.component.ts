@@ -14,6 +14,7 @@ import {EventsComponent} from "../events/events.component";
 import {StrategyComponent} from "../strategy/strategy.component";
 import {TitleComponent} from "../shared/title/title.component";
 import {AboutUsComponent} from "../about-us/about-us.component";
+import {HeroComponent} from "../hero/hero.component";
 
 @Component({
   selector: 'app-dashboard',
@@ -31,7 +32,8 @@ import {AboutUsComponent} from "../about-us/about-us.component";
     EventsComponent,
     StrategyComponent,
     TitleComponent,
-    AboutUsComponent
+    AboutUsComponent,
+    HeroComponent
   ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'

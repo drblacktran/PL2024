@@ -1,11 +1,11 @@
-import { Component } from '@angular/core';
+import {Component, HostListener} from '@angular/core';
 import {NgClass, NgForOf, NgOptimizedImage} from "@angular/common";
 import {PrimeTemplate} from "primeng/api";
 import {ButtonDirective} from "primeng/button";
 import {RouterLink} from "@angular/router";
 import {MenubarModule} from "primeng/menubar";
 import {Ripple} from "primeng/ripple";
-import {Tooltip, TooltipModule} from "primeng/tooltip";
+import {TooltipModule} from "primeng/tooltip";
 
 @Component({
   selector: 'app-navbar',
@@ -27,16 +27,17 @@ import {Tooltip, TooltipModule} from "primeng/tooltip";
 export class NavbarComponent {
 
 
-  navButtons = [
-    { label: 'Về Phiêu Linh', link: 'about' },
-    { label: 'Chương Trình Hoạt Động', link: 'programs' },
-    { label: 'Tài Trợ', link: 'sponsor' },
-    { label: 'Tin Tức', link: 'events' },
-    { label: 'Liên Hệ', link: 'contacts' },
-  ];
+  activeSection: string | null = null; // Currently active section
+  clickedSection: string | null = null; // Section clicked manually by user
 
-  scrollTo(section: string): void {
-    const element = document.getElementById(section);
+  ngOnInit(): void {
+    this.setupIntersectionObserver();
+  }
+
+  // Smooth scroll to a section and lock hover effect
+  scrollTo(sectionId: string): void {
+    const element = document.getElementById(sectionId);
+
     const navbarHeight = 60; // Navbar height here (adjust as needed)
 
     if (element) {
@@ -47,8 +48,73 @@ export class NavbarComponent {
         top: y,
         behavior: 'smooth',
       });
+
+      this.clickedSection = sectionId; // Lock the effect
     }
   }
+
+  // Intersection Observer to track active sections
+  setupIntersectionObserver(): void {
+    const options = {
+      root: null,
+      rootMargin: '-20% 0px -50% 0px', // Focus on the above section visibility
+      threshold: 0.1, // Trigger when a section is 10% visible
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && !this.clickedSection) {
+          const sectionId = entry.target.id;
+
+          // Highlight sections starting from "about"
+          if (sectionId !== 'hero') {
+            this.activeSection = sectionId;
+          }
+
+          // Force "contacts" if the footer is visible
+          if (sectionId === 'footer') {
+            this.activeSection = 'contacts';
+          }
+        }
+      });
+    }, options);
+
+    // Observe specific sections only
+    const sectionIds = ['about', 'programs', 'sponsor', 'events', 'contacts', 'footer'];
+    sectionIds.forEach((id) => {
+      const section = document.getElementById(id);
+      if (section) observer.observe(section);
+    });
+
+    // Reset manual highlight on scroll
+    window.addEventListener('scroll', () => {
+      if (this.clickedSection) {
+        setTimeout(() => (this.clickedSection = null), 50);
+      }
+    });
+  }
+
+
+  scrollProgress: number = 0;
+
+
+
+  // HostListener to track scroll position
+  @HostListener('window:scroll', [])
+  onWindowScroll(): void {
+    const scrollTop = window.scrollY || document.documentElement.scrollTop;
+    const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    this.scrollProgress = (scrollTop / docHeight) * 100;
+  }
+
+  navButtons = [
+    { label: 'Về Phiêu Linh', link: 'about' },
+    { label: 'Chương Trình Hoạt Động', link: 'programs' },
+    { label: 'Tài Trợ', link: 'sponsor' },
+    { label: 'Tin Tức', link: 'events' },
+    { label: 'Liên Hệ', link: 'contacts' },
+  ];
+
 
   currentLanguage: string = 'VN';
   toggleLanguage() {
@@ -59,7 +125,6 @@ export class NavbarComponent {
 
 
   // Dynamically gets the flag image URL
-
   getFlagUrl(): string {
     return `https://flagsapi.com/${this.currentLanguage}/flat/64.png`;
   }

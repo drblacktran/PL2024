@@ -14,19 +14,25 @@
       *ngFor="let group of groups; let i = index"
       (click)="selectGroup(group)"
       [class.text-p-teal]="selectedGroup === group"
-      class="uppercase font-medium px-4 py-2 rounded transition-all duration-300 hover:text-orange-400"
+      class="uppercase font-medium px-4 py-2 rounded transition-all duration-300 hover:text-p-red"
     >
       {{ group }}
     </button>
   </div>
 
-  <!-- Fixed 6x3 Grid -->
+  <!-- Fixed 4x3 Grid -->
   <div class="relative w-full">
-    <div class="grid grid-cols-6 gap-4">
+    <div class="grid grid-cols-4 h-[34rem] gap-x-8 gap-y-2">
       <!-- Display Visible Cards -->
       <div
         *ngFor="let card of visibleCards; let i = index"
-        class="relative h-32 group rounded-lg overflow-hidden shadow-md hover:scale-105 transition-transform duration-300 bg-gray-100 flex items-center justify-center"
+        (click)="highlightGroup(card.group)"
+        data-card="true"
+        class="relative h-40 group rounded-lg overflow-hidden shadow-md hover:scale-105 transition-transform duration-300 bg-gray-100 flex items-center justify-center"
+        [ngClass]="{
+        'border-4 border-t-p-red border-r-p-orange border-b-p-teal border-l-p-blue': selectedGroupForStyling === card.group
+
+    }"
       >
         <!-- Card Content -->
         <div class="text-center">
@@ -40,21 +46,32 @@
 
     <!-- Pagination Buttons -->
     <div class="flex justify-between items-center mt-6">
-      <button
+      <p-button
         (click)="prevPage()"
-        [disabled]="filteredCards.length <= cardsPerPage"
-        class="capitalize hover:text-p-orange px-4 py-2  text-gray-700 rounded"
+        [disabled]="totalPages <= 1"
+        class="capitalize text-[17px] hover:text-p-orange text-gray-700 rounded"
       >
-        <i class=" pi pi-chevron-left"></i> Quay Lại
-      </button>
+        <i class="pi pi-chevron-left m-1"></i> Quay Lại
+      </p-button>
 
-      <button
+      <!-- Pagination Indicators -->
+      <div class="flex space-x-2">
+    <span
+      *ngFor="let page of getPaginationIndicator(); let i = index"
+      class="w-8 h-2 rounded-lg cursor-pointer"
+      [class.bg-p-teal]="i === currentPage"
+      [class.bg-gray-300]="i !== currentPage"
+      (click)="currentPage = i; updateVisibleCards()"
+    ></span>
+      </div>
+
+      <p-button
         (click)="nextPage()"
-        [disabled]="filteredCards.length <= cardsPerPage"
-        class="capitalize hover:text-p-orange px-4 py-2  text-gray-700 rounded"
+        [disabled]="totalPages <= 1"
+        class="capitalize text-[17px] hover:text-p-orange text-gray-700"
       >
-        Tiếp Theo <i class="pi pi-chevron-right"></i>
-      </button>
+        Tiếp Theo <i class="pi pi-chevron-right m-1"></i>
+      </p-button>
     </div>
   </div>
 </div>
