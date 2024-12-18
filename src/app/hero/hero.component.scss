@@ -1,0 +1,53 @@
+.fade-transition {
+  transition: opacity 1s ease-in-out;
+}
+
+.opacity-0 {
+  opacity: 0;
+}
+
+.opacity-100 {
+  opacity: 1;
+}
+
+.typewriter-text {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  animation: typing 2.1s steps(40, end) forwards;
+}
+
+/* Delay for the second line */
+.second-line {
+  animation-delay: 2s; /* Starts after the first line finishes */
+  opacity: 0; /* Initially hidden */
+  animation-fill-mode: forwards;
+}
+
+/* Typing animation */
+@keyframes typing {
+  from {
+    width: 0;
+    opacity: 1;
+  }
+  to {
+    width: 100%;
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInBottom {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in-bottom {
+  animation: fadeInBottom 3.5s ease-out forwards;
+  opacity: 0;
+}

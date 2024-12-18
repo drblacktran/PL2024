@@ -6,6 +6,7 @@ import {RouterLink} from "@angular/router";
 import {MenubarModule} from "primeng/menubar";
 import {Ripple} from "primeng/ripple";
 import {TooltipModule} from "primeng/tooltip";
+import {ScrollService} from "../shared/scroll/scroll.service";
 
 @Component({
   selector: 'app-navbar',
@@ -30,70 +31,15 @@ export class NavbarComponent {
   activeSection: string | null = null; // Currently active section
   clickedSection: string | null = null; // Section clicked manually by user
 
-  ngOnInit(): void {
-    this.setupIntersectionObserver();
-  }
+  constructor(private scrollService: ScrollService) {}
 
   // Smooth scroll to a section and lock hover effect
   scrollTo(sectionId: string): void {
-    const element = document.getElementById(sectionId);
 
-    const navbarHeight = 60; // Navbar height here (adjust as needed)
 
-    if (element) {
-      const yOffset = -navbarHeight; // Negative offset to account for navbar
-      const y = element.getBoundingClientRect().top + window.scrollY + yOffset;
-
-      window.scrollTo({
-        top: y,
-        behavior: 'smooth',
-      });
-
-      this.clickedSection = sectionId; // Lock the effect
-    }
+    const navbarHeight = 60; // Adjust for fixed navbar height
+    this.scrollService.scrollToSection(sectionId, navbarHeight);
   }
-
-  // Intersection Observer to track active sections
-  setupIntersectionObserver(): void {
-    const options = {
-      root: null,
-      rootMargin: '-20% 0px -50% 0px', // Focus on the above section visibility
-      threshold: 0.1, // Trigger when a section is 10% visible
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting && !this.clickedSection) {
-          const sectionId = entry.target.id;
-
-          // Highlight sections starting from "about"
-          if (sectionId !== 'hero') {
-            this.activeSection = sectionId;
-          }
-
-          // Force "contacts" if the footer is visible
-          if (sectionId === 'footer') {
-            this.activeSection = 'contacts';
-          }
-        }
-      });
-    }, options);
-
-    // Observe specific sections only
-    const sectionIds = ['about', 'programs', 'sponsor', 'events', 'contacts', 'footer'];
-    sectionIds.forEach((id) => {
-      const section = document.getElementById(id);
-      if (section) observer.observe(section);
-    });
-
-    // Reset manual highlight on scroll
-    window.addEventListener('scroll', () => {
-      if (this.clickedSection) {
-        setTimeout(() => (this.clickedSection = null), 50);
-      }
-    });
-  }
-
 
   scrollProgress: number = 0;
 

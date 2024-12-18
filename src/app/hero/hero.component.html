@@ -1,5 +1,44 @@
-<section id = "hero">
-  <div class = "w-full h-[500px] bg-gray-300">
+<section id="hero" class="relative w-full overflow-hidden">
+  <!-- Hero Container -->
+  <div
+    class="w-full h-[100vh] flex flex-col justify-center items-center text-center relative bg-cover bg-center"
+    [ngStyle]="{ 'background-image': 'url(' + heroImages[currentImageIndex] + ')' }"
+  >
+    <!-- Black Overlay -->
+    <div
+      class="w-full h-full"
+      style="background-color: rgba(0, 0, 0, 0.5); position: absolute; top: 0; left: 0; z-index: 1;"
+    ></div>
 
+    <!-- Motto Text -->
+    <div
+      class="w-full font-medium h-[15vh] max-w-[70%] mt-[45vh] text-white text-[32px]"
+      style="text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); z-index: 1; text-align: center;"
+    >
+      <!-- Remember to put a wrapper div to handle browser width changes (Remove the container to see the error)-->
+      <div *ngIf="screenWidth >= minScreenWidthEffect else normalText">
+        <div class = "wrapper">
+          <span class="typewriter-text first-line">"Mọi trẻ em và thanh thiếu niên Việt Nam đều là những</span>
+        </div>
+        <div class = "wrapper">
+          <span class="typewriter-text second-line"> cá nhân hạnh phúc và những công dân tử tế."</span>
+        </div>
+
+
+      </div>
+
+      <!-- Fallback for Smaller Screens -->
+      <ng-template #normalText>
+        <p>{{ motto.description }}</p>
+      </ng-template>
+    </div>
+
+    <div
+      [ngClass]="{ 'fade-in-bottom': screenWidth >= minScreenWidthEffect }"
+      class="pt-[1vh] flex justify-center text-white z-[1] items-center"
+      (click)="scrollToSection('about')"
+    >
+      <i class="pi pi-angle-double-down text-[32px] hover:text-p-teal"></i>
+    </div>
   </div>
 </section>

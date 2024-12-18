@@ -1,3 +1,5 @@
+
+
 <main>
   <section>
     <div class="flex flex-row items-center justify-between bg-gray-50 shadow-md z-20">
@@ -9,10 +11,7 @@
           *ngFor="let button of navButtons; let i = index">
             <button
               class = "uppercase pr-1  border-r-2 border-gray-300 hover:text-p-teal hover:border-b-2 hover:rounded-br-lg"
-              (click)="scrollTo(button.link)"
-              [ngClass]="{
-                  'text-p-teal border-b-2 rounded-br-lg':
-                  activeSection === button.link || clickedSection === button.link}">
+              (click)="scrollTo(button.link)">
               {{ button.label }}
 
             </button>

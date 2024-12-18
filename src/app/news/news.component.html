@@ -1,1 +1,86 @@
-<p>news works!</p>
+<div class="flex flex-col gap-6">
+  <!-- Title -->
+  <app-title
+    [itemsAlignment]="'items-start'"
+    [borderColor]="'#999999'"
+    [backgroundColor]="'#FFFFFF'"
+    [textColor]="'#555555'"
+    [fontSize]="'18px'"
+    [label]="'Tin Tức'">
+  </app-title>
+
+  <!-- Grid Container for Cards 3x1 -->
+  <div class="grid grid-cols-3 gap-6">
+    <!-- Each Card -->
+    <div
+      *ngFor="let card of visibleCards; let i = index"
+      [ngClass]="{'fade-in-bottom': !card.animated}"
+      [ngStyle]="{'animationDelay': calculateAnimationDelay(i)}"
+      (animationend)="card.animated = true"
+      class="group flex flex-col items-center border-b-4 rounded-b-lg border-p-teal"
+    >
+    <!-- Clickable Image -->
+    <a [href]="card.link" target="_blank" class="w-full">
+      <img
+        [src]="card.image"
+        alt="Card Image"
+        class="w-full h-48 object-cover hover:scale-[1.03] transition-transform duration-200 rounded-lg"
+      />
+    </a>
+
+    <!-- Text Content -->
+    <div class="py-4 pl-1 flex flex-col items-start w-full">
+      <!-- Title -->
+      <div class="text-gray-700 font-bold text-lg mb-2">
+        {{ card.title }}
+      </div>
+
+      <!-- Date with Calendar Icon -->
+      <div class="flex items-center text-gray-500 text-sm mb-2">
+        <i class="pi pi-calendar mr-2"></i>
+        <span>{{ card.date }}</span>
+      </div>
+
+      <!-- Shortened Text -->
+      <div class="text-gray-600 text-sm mb-2">
+        {{ card.text | shortenTextCharacter:isExpanded[card.title]:75 }}
+        <a
+          (click)="toggleExpand(card.title)"
+          class="text-p-blue hover:underline"
+        >
+          {{ isExpanded[card.title] ? 'Thu gọn' : 'Đọc thêm' }}
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Pagination Buttons -->
+<div class="flex justify-between items-center mt-6">
+  <button
+    (click)="prevPage()"
+    class="capitalize text-[17px] hover:text-p-orange text-gray-700"
+  >
+    <i class="pi pi-chevron-left m-1"></i> Quay Lại
+  </button>
+
+  <!-- Pagination Indicators -->
+  <div class="flex space-x-2">
+      <span
+        *ngFor="let page of getPaginationIndicator(); let i = index"
+        class="w-8 h-2 rounded-lg cursor-pointer"
+        [ngClass]="{'bg-p-teal': i === currentPage, 'bg-gray-300': i !== currentPage}"
+        (click)="currentPage = i;"
+      ></span>
+    <span>
+    </span>
+  </div>
+
+  <button
+    (click)="nextPage()"
+    class="capitalize text-[17px] hover:text-p-orange text-gray-700"
+  >
+    Tiếp Theo <i class="pi pi-chevron-right m-1"></i>
+  </button>
+</div>
+</div>
